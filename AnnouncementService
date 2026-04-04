@@ -9,7 +9,7 @@ local announcementService = {
 local TweenService = game:GetService("TweenService")
 local cautionSound = script.CautionSound
 local popupSound = script.PopupSound
-local ICON_RIGHT_NUDGE = 105 -- HOW FAR TO THE RIGHT THE CAUTION IMAGE WILL MOVE
+local ICON_RIGHT_NUDGE = -0.005 -- HOW FAR TO THE RIGHT THE CAUTION IMAGE WILL MOVE
 
 announcementService.Announce = function 
 	(player:Player, 
@@ -102,13 +102,18 @@ announcementService.AnnounceCaution = function
 		textColor:Color3 -- OPTIONAL
 	)
 	
-	local function positionIcon(cautionImg:ImageLabel, cautionLabel:TextLabel)
+	local function positionIcon(cautionImg: ImageLabel, cautionLabel: TextLabel)
 		task.wait()
 		local textBounds = cautionLabel.TextBounds
 		local labelWidth = cautionLabel.AbsoluteSize.X
-		local textStartX = (labelWidth - textBounds.X) / 2
+		
+		if labelWidth == 0 then
+			return
+		end
+		
+		local textStartXScale = (1 - (textBounds.X / labelWidth)) / 2
 		cautionImg.AnchorPoint = Vector2.new(1, 0.5)
-		cautionImg.Position = UDim2.new(0, textStartX + ICON_RIGHT_NUDGE, 0.498, 0)
+		cautionImg.Position = UDim2.new(textStartXScale + ICON_RIGHT_NUDGE, 0, 0.498, 0)
 	end
 	
 	local cautionFrame = script.CautionFrame
