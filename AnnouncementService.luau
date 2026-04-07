@@ -62,9 +62,10 @@ announcementService.Announce = function
 			)
 			showUiStroke:Play()
 		end
+
 		showAnnouncement:Play()
+
 		popupSound:Play()
-		
 		task.wait(announcementDuration)
 		
 		local hideAnnouncement = TweenService:Create(
@@ -84,8 +85,9 @@ announcementService.Announce = function
 				}
 			)
 			hideUiStroke:Play()
-			hideAnnouncement:Play()
 		end
+
+hideAnnouncement:Play()
 		
 		hideAnnouncement.Completed:Wait()
 		announcementClone:Destroy()
@@ -194,8 +196,9 @@ announcementService.AnnounceCaution = function
 			)
 			imgIn:Play()
 			showUiStroke:Play()
-			showAnnouncement:Play()
 		end
+
+showAnnouncement:Play()
 
 		task.wait(announcementDuration)
 		
@@ -236,8 +239,10 @@ announcementService.AnnounceCaution = function
 			
 			imgOut:Play()
 			hideUiStroke:Play()
-			hideAnnouncement:Play()
 		end
+
+		hideAnnouncement:Play()
+
 		hideAnnouncement.Completed:Wait()
 		cautionClone:Destroy()
 	end
